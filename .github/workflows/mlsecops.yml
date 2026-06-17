@@ -25,6 +25,7 @@ jobs:
         pip install modelscan==0.8.2
         pip install semgrep
         pip install pyyaml
+        pip install cyclonedx-python-lib
 
     - name: ModelScan
       run: |
