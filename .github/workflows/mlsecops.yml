@@ -28,7 +28,7 @@ jobs:
 
     - name: ModelScan
       run: |
-        modelscan scan models
+        modelscan -p models/
 
     - name: Verify Signature
       run: |
