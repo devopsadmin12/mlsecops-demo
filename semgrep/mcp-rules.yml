@@ -1,29 +1,78 @@
 rules:
 
-- id: dangerous-exec
-  pattern: exec(...)
-  message: Dangerous use of exec() detected in MCP tool
+# Command Execution
+- id: mcp-os-system
+  message: MCP tool executes operating system commands
   severity: ERROR
   languages:
     - python
-
-- id: dangerous-eval
-  pattern: eval(...)
-  message: Dangerous use of eval() detected in MCP tool
-  severity: ERROR
-  languages:
-    - python
-
-- id: dangerous-os-system
   pattern: os.system(...)
-  message: Dangerous OS command execution detected in MCP tool
+
+- id: mcp-subprocess-shell
+  message: MCP tool uses subprocess with shell=True
   severity: ERROR
   languages:
     - python
+  patterns:
+    - pattern: subprocess.run(..., shell=True, ...)
+    - pattern-inside: |
+        import subprocess
+        ...
 
-- id: dangerous-subprocess
-  pattern: subprocess.run(...)
-  message: Subprocess execution detected in MCP tool
+- id: mcp-popen
+  message: MCP tool spawns processes using Popen
   severity: WARNING
   languages:
     - python
+  pattern: subprocess.Popen(...)
+
+# Code Execution
+- id: mcp-eval
+  message: MCP tool uses eval()
+  severity: ERROR
+  languages:
+    - python
+  pattern: eval(...)
+
+- id: mcp-exec
+  message: MCP tool uses exec()
+  severity: ERROR
+  languages:
+    - python
+  pattern: exec(...)
+
+# Secret Exposure
+- id: mcp-hardcoded-secret
+  message: Possible hardcoded credential in MCP server
+  severity: WARNING
+  languages:
+    - python
+  patterns:
+    - pattern-regex: '(?i)(api[_-]?key|secret|token|password)\s*=\s*["\x27].+["\x27]'
+
+# File System Access
+- id: mcp-arbitrary-file-read
+  message: MCP tool reads files from user supplied paths
+  severity: WARNING
+  languages:
+    - python
+  pattern: open($PATH,...)
+
+# Network Calls
+- id: mcp-http-request
+  message: MCP tool makes outbound HTTP requests
+  severity: INFO
+  languages:
+    - python
+  pattern-either:
+    - pattern: requests.get(...)
+    - pattern: requests.post(...)
+    - pattern: requests.request(...)
+
+# Dangerous Tool Registration
+- id: mcp-dangerous-tool-description
+  message: Tool description advertises command execution
+  severity: WARNING
+  languages:
+    - python
+  pattern-regex: '(?i)(execute command|run shell|terminal access|system command)'

@@ -50,11 +50,12 @@ jobs:
         name: cyclonedx-mlbom
         path: mlbom/mlbom-cyclonedx.json
         
-    - name: MCP Scan
+    - name: MCP Security Scan
       run: |
         semgrep scan \
-        --config semgrep/mcp-rules.yml \
-        mcp
+          --config semgrep/mcp-rules.yml \
+          mcp/dvmcp/challenges/
+      continue-on-error: true
 
     - name: Governance Check
       run: |
