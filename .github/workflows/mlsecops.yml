@@ -22,13 +22,10 @@ jobs:
 
     - name: Install Tools
       run: |
-        pip install modelscan
+        pip install modelscan==0.8.2
         pip install semgrep
         pip install pyyaml
 
-    - name: Create ModelScan Settings
-      run: |
-        modelscan create-settings-file
     - name: ModelScan
       run: |
         modelscan scan models
