@@ -1,0 +1,13 @@
+rules:
+
+- id: dangerous-os-command
+  pattern: os.system(...)
+  severity: ERROR
+
+- id: dangerous-subprocess
+  pattern: subprocess.run(..., shell=True)
+  severity: ERROR
+
+- id: dangerous-exec
+  pattern: exec(...)
+  severity: ERROR

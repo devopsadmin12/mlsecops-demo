@@ -1,0 +1,9 @@
+approved_models:
+  - safe.pkl
+
+blocked_models:
+  - evil.pkl
+
+require_signature: true
+
+require_mlbom: true

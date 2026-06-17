@@ -1,0 +1,10 @@
+import pickle
+
+data = {
+    "model":"safe"
+}
+
+pickle.dump(
+    data,
+    open("models/safe.pkl","wb")
+)

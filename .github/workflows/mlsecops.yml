@@ -1,0 +1,49 @@
+name: MLSecOps Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+
+  mlsecops:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - uses: sigstore/cosign-installer@v3
+
+    - name: Install Tools
+      run: |
+        pip install modelscan
+        pip install semgrep
+        pip install pyyaml
+
+    - name: ModelScan
+      run: |
+        modelscan scan models
+
+    - name: Verify Signature
+      run: |
+        bash scripts/verify_model.sh
+
+    - name: Generate MLBOM
+      run: |
+        python scripts/generate_mlbom.py
+
+    - name: MCP Scan
+      run: |
+        semgrep scan \
+        --config semgrep/mcp-rules.yml \
+        mcp
+
+    - name: Governance Check
+      run: |
+        python scripts/governance_check.py
