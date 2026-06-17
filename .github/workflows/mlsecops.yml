@@ -28,7 +28,7 @@ jobs:
 
     - name: ModelScan
       run: |
-        modelscan -p models/
+        modelscan -p models/evil.pkl
 
     - name: Verify Signature
       run: |
