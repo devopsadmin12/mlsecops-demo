@@ -2,25 +2,26 @@ from cyclonedx.model.bom import Bom
 from cyclonedx.model.component import Component, ComponentType
 from cyclonedx.output.json import JsonV1Dot6
 import hashlib
+import os
 
-# Calculate model hash
+# Create directory
+os.makedirs("mlbom", exist_ok=True)
+
 with open("models/evil.pkl", "rb") as f:
     sha256 = hashlib.sha256(f.read()).hexdigest()
 
 bom = Bom()
 
-# AI Model Component
 model_component = Component(
     name="evil.pkl",
     type=ComponentType.APPLICATION,
     version="1.0"
 )
 
-model_component.description = "ML Model Artifact"
+model_component.description = f"SHA256={sha256}"
 
 bom.components.add(model_component)
 
-# MCP Component
 mcp_component = Component(
     name="DVMCP",
     type=ComponentType.APPLICATION,
