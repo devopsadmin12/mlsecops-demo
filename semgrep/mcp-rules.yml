@@ -1,13 +1,29 @@
 rules:
 
-- id: dangerous-os-command
-  pattern: os.system(...)
-  severity: ERROR
-
-- id: dangerous-subprocess
-  pattern: subprocess.run(..., shell=True)
-  severity: ERROR
-
 - id: dangerous-exec
   pattern: exec(...)
+  message: Dangerous use of exec() detected in MCP tool
   severity: ERROR
+  languages:
+    - python
+
+- id: dangerous-eval
+  pattern: eval(...)
+  message: Dangerous use of eval() detected in MCP tool
+  severity: ERROR
+  languages:
+    - python
+
+- id: dangerous-os-system
+  pattern: os.system(...)
+  message: Dangerous OS command execution detected in MCP tool
+  severity: ERROR
+  languages:
+    - python
+
+- id: dangerous-subprocess
+  pattern: subprocess.run(...)
+  message: Subprocess execution detected in MCP tool
+  severity: WARNING
+  languages:
+    - python
