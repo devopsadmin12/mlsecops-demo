@@ -26,6 +26,9 @@ jobs:
         pip install semgrep
         pip install pyyaml
 
+    - name: Create ModelScan Settings
+      run: |
+        modelscan create-settings-file
     - name: ModelScan
       run: |
         modelscan scan models
