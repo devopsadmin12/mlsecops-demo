@@ -18,7 +18,7 @@ if model in policy["blocked_models"]:
 if policy["require_mlbom"]:
 
     if not os.path.exists(
-        "mlbom/mlbom.json"
+        "mlbom/mlbom-cyclonedx.json"
     ):
         errors.append(
             "MLBOM missing"
