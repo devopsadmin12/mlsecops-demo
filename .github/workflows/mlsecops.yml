@@ -54,7 +54,7 @@ jobs:
       run: |
         semgrep scan \
           --config semgrep/mcp-rules.yml \
-          mcp/dvmcp/challenges/
+          dvmcp/dvmcp/challenges/
       continue-on-error: true
 
     - name: Governance Check
