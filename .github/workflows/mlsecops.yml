@@ -38,7 +38,13 @@ jobs:
     - name: Generate MLBOM
       run: |
         python scripts/generate_mlbom.py
-
+        
+    - name: Upload MLBOM
+      uses: actions/upload-artifact@v4
+      with:
+        name: mlbom
+        path: mlbom/mlbom.json
+        
     - name: MCP Scan
       run: |
         semgrep scan \
