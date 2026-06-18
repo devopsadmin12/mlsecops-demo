@@ -1,4 +1,4 @@
-name: MLSecOps Pipeline
+name: MLSecOps Pipeline End to End
 
 on:
   workflow_dispatch:
@@ -29,8 +29,8 @@ jobs:
 
     - name: ModelScan
       run: |
-        modelscan -p models/evil.pkl
-      continue-on-error: true
+        modelscan -p models/safe.pkl
+      
 
     - name: Verify Signature
       run: |
