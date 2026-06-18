@@ -28,7 +28,7 @@ jobs:
 
     - name: ModelScan
       run: |
-        modelscan -p models/unsafe_zip_pytorch.pt
+        modelscan -p models/evil.pkl
       continue-on-error: true
 
     - name: Verify Signature
