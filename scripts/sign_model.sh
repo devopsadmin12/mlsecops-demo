@@ -2,11 +2,11 @@
 
 set -e
 
-MODEL=models/evil.pkl
+MODEL=models/safe.pkl
 
 cosign sign-blob \
   --key cosign.key \
-  --output-signature models/signatures/evil.pkl.sig \
+  --bundle models/signatures/safe.pkl.bundle \
   $MODEL
 
 echo "Model Signed"
