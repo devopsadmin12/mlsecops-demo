@@ -2,5 +2,5 @@
 
 cosign verify-blob \
   --key cosign.pub \
-  --bundle models/signatures/evil.pkl.bundle \
-  models/evil.pkl
+  --bundle models/signatures/safe.pkl.bundle \
+  models/safe.pkl
