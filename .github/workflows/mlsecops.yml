@@ -2,6 +2,7 @@ name: MLSecOps Pipeline End to End Workflow
 
 on:
   workflow_dispatch:
+  push:
 jobs:
 
   mlsecops:
