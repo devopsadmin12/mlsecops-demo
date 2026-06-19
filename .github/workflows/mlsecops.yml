@@ -60,4 +60,4 @@ jobs:
     - name: Governance Check
       run: |
         python scripts/governance_check.py
-      continue-on-error: true
+      
