@@ -1,4 +1,4 @@
-name: MLSecOps Pipeline End to End
+name: MLSecOps Pipeline End to End Workflow
 
 on:
   workflow_dispatch:
