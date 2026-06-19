@@ -6,7 +6,7 @@ policy = yaml.safe_load(
     open("governance/policy.yml")
 )
 
-model = "safe.pkl"
+model = "evil.pkl"
 
 errors = []
 
